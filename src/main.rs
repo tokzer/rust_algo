@@ -101,22 +101,7 @@ fn hanoi_menu() {
         };
 
         match choise {
-            1 => {
-                println!("Choose how many discs to use:");
-                let mut discs = String::new();
-                io::stdin()
-                    .read_line(&mut discs)
-                    .expect("Failed to read the number!");
-
-                let discs: i32 = match discs.trim().parse() {
-                    Ok(num) => tower::move_disc(num, "L", "R", "C"),
-
-                    Err(_) => {
-                        println!("Could not parse {:?}", discs);
-                        break;
-                    }
-                };
-            }
+            1 => tower::play(),
             2 => break,
             other => println!("Please pick a number between 1-5: {:?}", other),
         }
