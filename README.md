@@ -1,3 +1,3 @@
 # rust_algo
 
-Implementing old C++ projects in Rust as a learning an exercies.
+Implementing old C++ projects in Rust as a learning exercise.
