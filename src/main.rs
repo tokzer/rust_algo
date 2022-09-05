@@ -3,6 +3,8 @@ use std::io;
 use std::rc::Rc;
 use std::rc::Weak;
 
+mod tower;
+
 #[derive(Debug)]
 struct Node {
     value: i32,
@@ -17,7 +19,7 @@ fn main() {
         println!("1. Binary Tree.");
         println!("2. Towers of Hanoi!");
         println!("3. Testing Node struct!");
-        println!("3. End the program!");
+        println!("4. End the program!");
 
         let mut choise = String::new();
 
@@ -81,28 +83,10 @@ fn main() {
     }
 }
 
-//fn read_choise() -> i32 {
-//    let mut choise = String::new();
-
-//    io::stdin()
-//        .read_line(&mut choise)
-//        .expect("Failed to read the line!");
-
-//    let choise: i32 = match choise.trim().parse() {
-//        Ok(num) => num,
-//        Err(_) => println!("Error in parsing the value!"),
-//    };
-
-//    choise
-//}
-
 fn hanoi_menu() {
     loop {
-        println!("Choose the numer of discs to use:");
-        println!("2. Search the tree for all the numbers.");
-        println!("3. Search for a given number.");
-        println!("4. Erase the tree and destroy the data.");
-        println!("5. Go back.");
+        println!("1. Play.");
+        println!("2. Go back.");
         println!("Choose: ");
 
         let mut choise = String::new();
@@ -117,11 +101,23 @@ fn hanoi_menu() {
         };
 
         match choise {
-            1 => println!("You have chosen: {:?}", 1),
-            2 => println!("You have chosen: {:?}", 2),
-            3 => println!("You have chosen: {:?}", 3),
-            4 => println!("You have chosen: {:?}", 4),
-            5 => break,
+            1 => {
+                println!("Choose how many discs to use:");
+                let mut discs = String::new();
+                io::stdin()
+                    .read_line(&mut discs)
+                    .expect("Failed to read the number!");
+
+                let discs: i32 = match discs.trim().parse() {
+                    Ok(num) => tower::move_disc(num, "L", "R", "C"),
+
+                    Err(_) => {
+                        println!("Could not parse {:?}", discs);
+                        break;
+                    }
+                };
+            }
+            2 => break,
             other => println!("Please pick a number between 1-5: {:?}", other),
         }
     }
