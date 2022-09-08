@@ -10,7 +10,6 @@ pub fn play() {
 
     match discs.trim().parse() {
         Ok(num) => move_disc(num, "L", "R", "C"),
-
         Err(_) => {
             println!("Could not parse {:?}", discs);
         }
